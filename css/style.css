@@ -212,7 +212,12 @@ summary:focus-visible {
 .primary-nav a:hover,
 .primary-nav a[aria-current="page"] { color: var(--color-primary); text-decoration: none; }
 .has-dropdown { position: relative; }
-.dropdown {
+/* Selector is scoped to .has-dropdown (not just .dropdown) so this beats
+   .primary-nav ul's `display: flex` on specificity — .dropdown is itself a
+   <ul> nested inside .primary-nav ul, so it matches that rule too, and
+   without the extra class here .primary-nav ul used to win and force the
+   dropdown visible at all times regardless of hover state. */
+.has-dropdown .dropdown {
   list-style: none;
   position: absolute;
   top: 100%;
