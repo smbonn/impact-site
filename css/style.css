@@ -373,6 +373,19 @@ section { padding: 64px 0; }
   box-shadow: var(--shadow-card);
 }
 .card h3 { margin-bottom: 10px; }
+/* Bold accent variant: dark navy card for calling out a block against the
+   otherwise cream/white page (e.g. contact page sidebar). Matches the
+   dark navy full-bleed sections from the original brand design instead of
+   defaulting every card to white. */
+.card-accent {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--cream);
+}
+.card-accent h3 { color: #fff; }
+.card-accent a { color: var(--teal-light); }
+.card-accent a:hover { color: #fff; }
+.card-accent .small { color: var(--teal-light); }
 .card .tag {
   display: inline-block;
   font-size: 0.72rem;
