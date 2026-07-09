@@ -2,66 +2,48 @@
 // shape js/substack-feed.js expects. Uses only Node's built-in fetch (Node 18+)
 // so there is nothing to install and nothing to keep updated.
 //
+// Fetches via the rss2json.com public API rather than hitting Substack's feed
+// URL directly: Substack sits behind Cloudflare Bot Management, which blocks
+// GitHub Actions' datacenter IP ranges outright (confirmed: direct fetch gets
+// a hard 403 from every Actions runner, every time, regardless of headers).
+// rss2json fetches the feed server-side on infrastructure Substack doesn't
+// block, and returns it as clean JSON \u2014 which also means no more hand-rolled
+// XML/regex parsing here.
+//
 // Run manually with:  node scripts/fetch-substack.mjs
 // Runs automatically via .github/workflows/update-substack.yml
 
 import { writeFile } from "node:fs/promises";
 
 const FEED_URL = "https://sierramariebonn.substack.com/feed";
+const RSS2JSON_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(FEED_URL)}`;
 const OUTPUT_PATH = new URL("../data/substack-posts.json", import.meta.url);
 const MAX_ITEMS = 12;
 
-function tagValue(xml, tag) {
-  const match = xml.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`, "i"));
-  if (!match) return "";
-  return match[1]
-    .replace(/^<!\[CDATA\[/, "")
-    .replace(/\]\]>$/, "")
-    .trim();
-}
-
-function stripHtml(html) {
-  return html
-    .replace(/<[^>]+>/g, " ")
-    .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&#39;/g, "'")
-    .replace(/&quot;/g, '"')
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function excerptFrom(descriptionHtml, wordLimit = 40) {
-  const text = stripHtml(descriptionHtml);
-  const words = text.split(" ");
-  if (words.length <= wordLimit) return text;
+function excerptFrom(text, wordLimit = 40) {
+  const words = text.trim().split(/\s+/);
+  if (words.length <= wordLimit) return text.trim();
   return words.slice(0, wordLimit).join(" ") + "\u2026";
 }
 
 async function main() {
-  const res = await fetch(FEED_URL, {
-    headers: { "User-Agent": "impactconsultingagency.org-feed-bot/1.0" }
-  });
+  const res = await fetch(RSS2JSON_URL);
   if (!res.ok) {
-    throw new Error(`Failed to fetch Substack feed: ${res.status} ${res.statusText}`);
+    throw new Error(`Failed to fetch Substack feed via rss2json: ${res.status} ${res.statusText}`);
   }
-  const xml = await res.text();
+  const data = await res.json();
+  if (data.status !== "ok") {
+    throw new Error(`rss2json returned an error: ${data.message || JSON.stringify(data)}`);
+  }
 
-  const itemBlocks = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
-  const posts = itemBlocks.slice(0, MAX_ITEMS).map((block) => {
-    const title = tagValue(block, "title");
-    const link = tagValue(block, "link");
-    const pubDate = tagValue(block, "pubDate");
-    const description = tagValue(block, "description");
-    const category = tagValue(block, "category");
-    return {
-      title: stripHtml(title),
-      link: link.trim(),
-      pubDate: pubDate ? new Date(pubDate).toISOString() : "",
-      category: category ? stripHtml(category) : "",
-      excerpt: excerptFrom(description)
-    };
-  });
+  const posts = (data.items || []).slice(0, MAX_ITEMS).map((item) => ({
+    title: (item.title || "").trim(),
+    link: (item.link || "").trim(),
+    // rss2json normalizes pubDate to "YYYY-MM-DD HH:MM:SS" in UTC.
+    pubDate: item.pubDate ? new Date(item.pubDate.replace(" ", "T") + "Z").toISOString() : "",
+    category: item.categories && item.categories.length ? item.categories[0] : "",
+    excerpt: excerptFrom(item.description || "")
+  }));
 
   if (posts.length === 0) {
     console.warn("No items parsed from feed \u2014 leaving existing JSON file untouched.");
