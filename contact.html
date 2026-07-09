@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact | ImpACT Consulting</title>
+<meta name="description" content="Get in touch with ImpACT Consulting for organizational strategy, career and leadership coaching, or pageant coaching. All inquiries receive a response within 48 hours.">
+<link rel="canonical" href="https://impactconsultingagency.org/contact.html">
+<meta property="og:title" content="Contact | ImpACT Consulting">
+<meta property="og:url" content="https://impactconsultingagency.org/contact.html">
+<link rel="icon" href="/assets/images/favicon.png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="/index.html"><img src="/assets/images/logo-black.png" alt="ImpACT Consulting" width="940" height="788"></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">&#9776; Menu</button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+      <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li class="has-dropdown">
+          <a href="/organizational-strategy.html">Services</a>
+          <ul class="dropdown">
+            <li><a href="/organizational-strategy.html">Organizational Strategy &amp; Consulting</a></li>
+            <li><a href="/career-leadership-coaching.html">Career Strategy &amp; Leadership Coaching</a></li>
+            <li><a href="/pageant-coaching.html">Strategic Pageant Coaching</a></li>
+          </ul>
+        </li>
+        <li><a href="/articles/index.html">Articles</a></li>
+        <li><a href="/free-resources.html">Free Resources</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a class="nav-cta" href="/contact.html" aria-current="page">Get In Touch</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow">Let's start the conversation</span>
+      <h1>Get in touch</h1>
+      <p class="lede">Whether you're ready to book or just exploring your options, reach out and we'll find the right path forward together. All inquiries receive a response within 48 hours.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container grid grid-2" style="align-items:start;">
+      <div>
+        <h2>Tell us where you are</h2>
+        <!--
+          FORM HANDLING: GitHub Pages cannot process form submissions on its
+          own (it only serves static files). The action below points at
+          Formspree (formspree.io), a form-backend service with a generous
+          free tier that emails submissions straight to Sierra's inbox with
+          no backend code required. Replace YOUR_FORM_ID after creating a
+          free Formspree account and adding this domain. Netlify Forms is a
+          one-line alternative if the site is ever hosted on Netlify instead.
+        -->
+        <form class="stacked-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div>
+            <label for="contact-email">Email</label>
+            <input type="email" id="contact-email" name="email" required>
+          </div>
+          <div>
+            <label for="path">I'm reaching out about</label>
+            <select id="path" name="path">
+              <option>Organizational strategy &amp; consulting</option>
+              <option>Career strategy &amp; leadership coaching</option>
+              <option>Strategic pageant coaching</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div>
+            <label for="message">Tell us a bit about your goals and timeline</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send inquiry</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Faster paths, by audience</h3>
+        <ul>
+          <li><strong>Preparing for a pageant?</strong> Mention your system and competition date so we can gauge timeline.</li>
+          <li><strong>Building your career or brand?</strong> A discovery call is the best starting point.</li>
+          <li><strong>Leading an organization?</strong> Request a complimentary 30-minute consultation.</li>
+        </ul>
+        <h3 style="margin-top:24px;">Other ways to connect</h3>
+        <ul>
+          <li><a href="https://www.facebook.com/impactconsultingagency"><i data-lucide="facebook" class="icon-inline" aria-hidden="true"></i> Facebook</a></li>
+          <li><a href="https://www.instagram.com/imp.actconsulting"><i data-lucide="instagram" class="icon-inline" aria-hidden="true"></i> Instagram</a></li>
+        </ul>
+        <p class="small" style="margin-top:20px;">Based in El Dorado, Kansas. Virtual coaching and consulting available nationwide.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <p class="logo" style="margin-bottom:10px;"><img src="/assets/images/logo-black.png" alt="ImpACT Consulting" width="940" height="788"></p>
+        <p class="small">Strategic consulting, leadership coaching, and pageant preparation for organizations, entrepreneurs, and emerging leaders. Based in El Dorado, Kansas, working with clients nationwide.</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/impactconsultingagency"><i data-lucide="facebook" aria-hidden="true"></i> Facebook</a>
+          <a href="https://www.instagram.com/imp.actconsulting"><i data-lucide="instagram" aria-hidden="true"></i> Instagram</a>
+        </div>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/organizational-strategy.html">Organizational Strategy</a></li>
+          <li><a href="/career-leadership-coaching.html">Career &amp; Leadership Coaching</a></li>
+          <li><a href="/pageant-coaching.html">Pageant Coaching</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="/articles/index.html">Articles &amp; Insights</a></li>
+          <li><a href="/free-resources.html">Free Downloads</a></li>
+          <li><a href="https://getstageready.app">Stage Ready App</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about.html">About Sierra</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 ImpACT Consulting. All rights reserved.</p>
+      <p>El Dorado, Kansas &middot; Working with clients nationwide</p>
+    </div>
+  </div>
+</footer>
+<script src="/js/main.js"></script>
+</body>
+</html>
