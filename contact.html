@@ -56,38 +56,24 @@
       <div>
         <h2>Tell us where you are</h2>
         <!--
-          FORM HANDLING: GitHub Pages cannot process form submissions on its
-          own (it only serves static files). The action below points at
-          Formspree (formspree.io), a form-backend service with a generous
-          free tier that emails submissions straight to Sierra's inbox with
-          no backend code required. Replace YOUR_FORM_ID after creating a
-          free Formspree account and adding this domain. Netlify Forms is a
-          one-line alternative if the site is ever hosted on Netlify instead.
+          FORM HANDLING: HoneyBook embedded inquiry form. Managed from
+          Sierra's HoneyBook account (leads, follow-up, and booking all
+          live there) rather than a separate form-backend service. The
+          card wrapper below is site styling; the form fields inside
+          hb-embed are rendered by HoneyBook's own widget script and follow
+          HoneyBook's theme settings, not this site's CSS.
         -->
-        <form class="stacked-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-          <div>
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-          <div>
-            <label for="contact-email">Email</label>
-            <input type="email" id="contact-email" name="email" required>
-          </div>
-          <div>
-            <label for="path">I'm reaching out about</label>
-            <select id="path" name="path">
-              <option>Organizational strategy &amp; consulting</option>
-              <option>Career strategy &amp; leadership coaching</option>
-              <option>Strategic pageant coaching</option>
-              <option>Something else</option>
-            </select>
-          </div>
-          <div>
-            <label for="message">Tell us a bit about your goals and timeline</label>
-            <textarea id="message" name="message" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Send inquiry</button>
-        </form>
+        <div class="card hb-embed">
+          <div class="hb-p-69012b7c54282f0007acdef6-6"></div>
+          <img height="1" width="1" style="display:none" src="https://www.honeybook.com/p.png?pid=69012b7c54282f0007acdef6">
+          <script>
+            (function(h,b,s,n,i,p,e,t) {
+              h._HB_ = h._HB_ || {};h._HB_.pid = i;;;;
+              t=b.createElement(s);t.type="text/javascript";t.async=!0;t.src=n;
+              e=b.getElementsByTagName(s)[0];e.parentNode.insertBefore(t,e);
+          })(window,document,"script","https://widget.honeybook.com/assets_users_production/websiteplacements/placement-controller.min.js","69012b7c54282f0007acdef6");
+          </script>
+        </div>
       </div>
       <div class="card">
         <h3>Faster paths, by audience</h3>

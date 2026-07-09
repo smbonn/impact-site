@@ -474,6 +474,12 @@ form.stacked-form textarea {
 }
 form.stacked-form textarea { min-height: 140px; resize: vertical; }
 
+/* HoneyBook embedded contact form. The card itself is site styling; the
+   fields inside are rendered by HoneyBook's widget script and follow
+   HoneyBook's own theme settings, not this stylesheet. min-height keeps
+   the card from collapsing to nothing before the widget script loads. */
+.hb-embed { min-height: 420px; }
+
 /* ---------- Articles ---------- */
 .article-card { display: flex; flex-direction: column; height: 100%; }
 .article-card .meta {
