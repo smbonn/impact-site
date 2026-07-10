@@ -177,11 +177,11 @@ summary:focus-visible {
   align-items: center;
 }
 .logo img {
-  height: 60px;
+  height: 56px;
   width: auto;
   display: block;
 }
-.site-footer .logo img { height: 76px; }
+.site-footer .logo img { height: 68px; }
 .nav-toggle {
   display: none;
   align-items: center;
