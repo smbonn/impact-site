@@ -26,11 +26,22 @@ function excerptFrom(text, wordLimit = 40) {
   return words.slice(0, wordLimit).join(" ") + "\u2026";
 }
 
-async function main() {
-  const res = await fetch(RSS2JSON_URL);
-  if (!res.ok) {
-    throw new Error(`Failed to fetch Substack feed via rss2json: ${res.status} ${res.statusText}`);
+// rss2json occasionally returns a transient 502/503 (seen once in production
+// as of 2026-07-09). One retry after a short pause clears that without
+// waiting a full day for the next scheduled run or failing the workflow.
+async function fetchWithRetry(url, attempts = 2) {
+  let lastErr;
+  for (let i = 0; i < attempts; i++) {
+    const res = await fetch(url);
+    if (res.ok) return res;
+    lastErr = new Error(`Failed to fetch Substack feed via rss2json: ${res.status} ${res.statusText}`);
+    if (i < attempts - 1) await new Promise((r) => setTimeout(r, 3000));
   }
+  throw lastErr;
+}
+
+async function main() {
+  const res = await fetchWithRetry(RSS2JSON_URL);
   const data = await res.json();
   if (data.status !== "ok") {
     throw new Error(`rss2json returned an error: ${data.message || JSON.stringify(data)}`);
